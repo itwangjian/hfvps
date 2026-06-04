@@ -1,722 +1,587 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的导航 · Bookmarks</title>
+<style>
+  :root {
+    --bg-0: #0a0e1a;
+    --bg-1: #111827;
+    --bg-2: #1a2235;
+    --border: rgba(148, 163, 184, 0.12);
+    --border-hover: rgba(99, 179, 237, 0.5);
+    --text-1: #e2e8f0;
+    --text-2: #94a3b8;
+    --text-3: #64748b;
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --danger: #f87171;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg-0);
+    color: var(--text-1);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 100%, rgba(129, 140, 248, 0.08) 0%, transparent 50%),
+      var(--bg-0);
+  }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px; margin-bottom: 28px;
+  }
+
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 22px; font-weight: 600; letter-spacing: 0.5px;
+  }
+
+  .brand-logo {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: grid; place-items: center; font-size: 18px;
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.3);
+  }
+
+  .toolbar {
+    display: flex; gap: 10px; align-items: center; flex: 1;
+    justify-content: flex-end; min-width: 280px;
+  }
+
+  .search-box {
+    position: relative; flex: 1; max-width: 420px;
+  }
+
+  .search-box input {
+    width: 100%; padding: 11px 14px 11px 40px;
+    background: var(--bg-1); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text-1); font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .search-box input:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+  }
+
+  .search-box::before {
+    content: "🔍"; position: absolute; left: 12px; top: 50%;
+    transform: translateY(-50%); font-size: 14px; opacity: 0.6;
+  }
+
+  .btn {
+    padding: 10px 16px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--bg-1); color: var(--text-1); cursor: pointer;
+    font-size: 14px; font-weight: 500; transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border: none; color: #fff;
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+  }
+
+  .btn-ghost { background: transparent; }
+
+  .btn-icon { padding: 10px 12px; }
+
+  .stats {
+    color: var(--text-3); font-size: 13px; margin-bottom: 20px;
+  }
+
+  .category {
+    margin-bottom: 36px; animation: fadeIn 0.4s ease;
+  }
+
+  .category-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .category-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 16px; font-weight: 600; color: var(--text-1);
+  }
+
+  .category-title .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  .category-count { color: var(--text-3); font-size: 13px; font-weight: 400; }
+
+  .category-actions { display: flex; gap: 6px; }
+
+  .icon-btn {
+    background: transparent; border: none; color: var(--text-3);
+    cursor: pointer; padding: 4px 8px; border-radius: 6px;
+    font-size: 13px; transition: all 0.15s;
+  }
+
+  .icon-btn:hover { color: var(--accent); background: var(--bg-2); }
+
+  .icon-btn.danger:hover { color: var(--danger); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px; background: var(--bg-1); border: 1px solid var(--border);
+    border-radius: 12px; text-decoration: none; color: var(--text-1);
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+
+  .card::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.06), transparent);
+    opacity: 0; transition: opacity 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--border-hover); transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--bg-2); display: grid; place-items: center;
+    flex-shrink: 0; overflow: hidden;
+  }
+
+  .card-icon img { width: 24px; height: 24px; }
+
+  .card-icon-fallback {
+    width: 100%; height: 100%; display: grid; place-items: center;
+    color: var(--accent); font-weight: 600; font-size: 14px;
+  }
+
+  .card-body { flex: 1; min-width: 0; }
+
+  .card-name {
+    font-size: 14px; font-weight: 500; color: var(--text-1);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .card-desc {
+    font-size: 12px; color: var(--text-3);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .card-actions {
+    position: absolute; top: 8px; right: 8px;
+    display: flex; gap: 4px; opacity: 0;
+    transition: opacity 0.15s; z-index: 2;
+  }
+
+  .card:hover .card-actions { opacity: 1; }
+
+  .card-action {
+    width: 24px; height: 24px; border-radius: 6px;
+    background: var(--bg-2); border: 1px solid var(--border);
+    color: var(--text-2); cursor: pointer; font-size: 11px;
+    display: grid; place-items: center; transition: all 0.15s;
+  }
+
+  .card-action:hover { color: var(--accent); }
+
+  .card-action.danger:hover { color: var(--danger); border-color: var(--danger); }
+
+  .empty {
+    text-align: center; padding: 80px 20px; color: var(--text-3);
+  }
+
+  .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
+
+  /* Modal */
+  .modal-mask {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px); display: none;
+    align-items: center; justify-content: center; z-index: 100;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .modal-mask.active { display: flex; }
+
+  .modal {
+    background: var(--bg-1); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; width: 90%; max-width: 460px;
+    box-shadow: var(--shadow);
+    animation: slideUp 0.25s ease;
+  }
+
+  .modal h3 { margin-bottom: 18px; font-size: 18px; }
+
+  .field { margin-bottom: 14px; }
+
+  .field label {
+    display: block; margin-bottom: 6px; font-size: 13px;
+    color: var(--text-2);
+  }
+
+  .field input, .field select {
+    width: 100%; padding: 10px 12px; background: var(--bg-2);
+    border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-1); font-size: 14px;
+    font-family: inherit;
+  }
+
+  .field input:focus, .field select:focus {
+    outline: none; border-color: var(--accent);
+  }
+
+  .modal-actions {
+    display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 20px 14px; }
+    .toolbar { width: 100%; }
+    .search-box { max-width: none; }
+  }
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="brand-logo">⚡</div>
+      <span>我的导航</span>
+    </div>
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" id="search" placeholder="搜索名称、描述、标签…" autocomplete="off">
+      </div>
+      <button class="btn btn-primary" id="btn-add">+ 添加</button>
+      <button class="btn btn-ghost btn-icon" id="btn-export" title="导出 JSON">⬇</button>
+      <button class="btn btn-ghost btn-icon" id="btn-import" title="导入 JSON">⬆</button>
+      <input type="file" id="file-import" accept="application/json" hidden>
+    </div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+  <div id="content"></div>
+</div>
+
+<!-- Add/Edit Modal -->
+<div class="modal-mask" id="modal-mask">
+  <div class="modal">
+    <h3 id="modal-title">添加书签</h3>
+    <div class="field">
+      <label>名称 *</label>
+      <input type="text" id="f-name" placeholder="GitHub">
+    </div>
+    <div class="field">
+      <label>URL *</label>
+      <input type="text" id="f-url" placeholder="https://github.com">
+    </div>
+    <div class="field">
+      <label>描述</label>
+      <input type="text" id="f-desc" placeholder="代码托管平台">
+    </div>
+    <div class="field">
+      <label>分类</label>
+      <input type="text" id="f-cat" list="cat-list" placeholder="开发工具">
+      <datalist id="cat-list"></datalist>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="btn-cancel">取消</button>
+      <button class="btn btn-primary" id="btn-save">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const STORAGE_KEY = 'bookmarks_v1';
+  const DEFAULT_DATA = [
+    { id: 'd1', name: 'Google',     url: 'https://www.google.com',     desc: '搜索引擎',         category: '常用' },
+    { id: 'd2', name: 'GitHub',     url: 'https://github.com',         desc: '代码托管',         category: '开发工具' },
+    { id: 'd3', name: 'MDN Web Docs', url: 'https://developer.mozilla.org', desc: 'Web 技术文档', category: '开发工具' },
+    { id: 'd4', name: 'SAP Help Portal', url: 'https://help.sap.com',  desc: 'SAP 官方文档',     category: 'SAP' },
+    { id: 'd5', name: 'ABAP Cheat Sheets', url: 'https://github.com/SAP-samples/abap-cheat-sheets', desc: 'ABAP 现代语法速查', category: 'SAP' },
+    { id: 'd6', name: 'Claude',     url: 'https://claude.ai',          desc: 'Anthropic AI',     category: 'AI' },
+    { id: 'd7', name: 'ChatGPT',    url: 'https://chat.openai.com',    desc: 'OpenAI',           category: 'AI' },
+  ];
+
+  let data = load();
+  let editingId = null;
+
+  const $ = (s) => document.querySelector(s);
+  const content = $('#content');
+  const searchInput = $('#search');
+  const stats = $('#stats');
+  const modalMask = $('#modal-mask');
+  const catList = $('#cat-list');
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [...DEFAULT_DATA];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [...DEFAULT_DATA];
+    } catch {
+      return [...DEFAULT_DATA];
+    }
+  }
+
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function uid() { return 'b' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+  function getDomain(url) {
+    try { return new URL(url).hostname; } catch { return ''; }
+  }
+
+  function faviconURL(url) {
+    const d = getDomain(url);
+    return d ? `https://www.google.com/s2/favicons?domain=${d}&sz=64` : '';
+  }
+
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[c]);
+  }
+
+  function groupByCategory(list) {
+    const map = new Map();
+    for (const item of list) {
+      const k = item.category || '未分类';
+      if (!map.has(k)) map.set(k, []);
+      map.get(k).push(item);
+    }
+    return map;
+  }
+
+  function render() {
+    const q = searchInput.value.trim().toLowerCase();
+    const filtered = q
+      ? data.filter((b) =>
+          [b.name, b.desc, b.category, b.url].some((f) => (f || '').toLowerCase().includes(q))
+        )
+      : data;
+
+    stats.textContent = q
+      ? `找到 ${filtered.length} 个结果（共 ${data.length} 个书签）`
+      : `共 ${data.length} 个书签 · ${groupByCategory(data).size} 个分类`;
+
+    if (filtered.length === 0) {
+      content.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">🔍</div>
+          <div>${q ? '没有匹配的书签' : '还没有书签，点击右上角「+ 添加」开始吧'}</div>
+        </div>`;
+      updateCatList();
+      return;
+    }
+
+    const groups = groupByCategory(filtered);
+    const categories = [...groups.keys()].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+
+    content.innerHTML = categories.map((cat) => {
+      const items = groups.get(cat);
+      return `
+        <section class="category">
+          <div class="category-header">
+            <div class="category-title">
+              <span class="dot"></span>
+              <span>${escapeHtml(cat)}</span>
+              <span class="category-count">· ${items.length}</span>
             </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+          </div>
+          <div class="grid">
+            ${items.map(renderCard).join('')}
+          </div>
+        </section>`;
+    }).join('');
+
+    bindCardEvents();
+    updateCatList();
+  }
+
+  function renderCard(b) {
+    const fav = faviconURL(b.url);
+    const initial = (b.name || '?').slice(0, 1).toUpperCase();
+    return `
+      <a class="card" href="${escapeHtml(b.url)}" target="_blank" rel="noopener" data-id="${b.id}">
+        <div class="card-icon">
+          ${fav
+            ? `<img src="${fav}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'card-icon-fallback',textContent:'${initial}'}))">`
+            : `<div class="card-icon-fallback">${initial}</div>`}
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+        <div class="card-body">
+          <div class="card-name">${escapeHtml(b.name)}</div>
+          <div class="card-desc">${escapeHtml(b.desc || getDomain(b.url))}</div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+        <div class="card-actions">
+          <button class="card-action" data-act="edit" title="编辑">✎</button>
+          <button class="card-action danger" data-act="del" title="删除">✕</button>
         </div>
-    </section>
+      </a>`;
+  }
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  function bindCardEvents() {
+    content.querySelectorAll('.card-action').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = btn.closest('.card');
+        const id = card.dataset.id;
+        const act = btn.dataset.act;
+        if (act === 'del') deleteItem(id);
+        else if (act === 'edit') openModal(id);
+      });
+    });
+  }
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+  function updateCatList() {
+    const cats = [...new Set(data.map((b) => b.category).filter(Boolean))];
+    catList.innerHTML = cats.map((c) => `<option value="${escapeHtml(c)}">`).join('');
+  }
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  function openModal(id) {
+    editingId = id || null;
+    $('#modal-title').textContent = id ? '编辑书签' : '添加书签';
+    if (id) {
+      const b = data.find((x) => x.id === id);
+      if (!b) return;
+      $('#f-name').value = b.name;
+      $('#f-url').value = b.url;
+      $('#f-desc').value = b.desc || '';
+      $('#f-cat').value = b.category || '';
+    } else {
+      ['#f-name', '#f-url', '#f-desc', '#f-cat'].forEach((s) => ($(s).value = ''));
+    }
+    modalMask.classList.add('active');
+    setTimeout(() => $('#f-name').focus(), 50);
+  }
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  function closeModal() {
+    modalMask.classList.remove('active');
+    editingId = null;
+  }
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+  function saveItem() {
+    const name = $('#f-name').value.trim();
+    let url = $('#f-url').value.trim();
+    const desc = $('#f-desc').value.trim();
+    const category = $('#f-cat').value.trim() || '未分类';
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+    if (!name || !url) {
+      alert('名称和 URL 必填');
+      return;
+    }
+    if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+    if (editingId) {
+      const idx = data.findIndex((x) => x.id === editingId);
+      if (idx >= 0) data[idx] = { ...data[idx], name, url, desc, category };
+    } else {
+      data.push({ id: uid(), name, url, desc, category });
+    }
+    save();
+    closeModal();
+    render();
+  }
+
+  function deleteItem(id) {
+    const b = data.find((x) => x.id === id);
+    if (!b) return;
+    if (!confirm(`确定删除「${b.name}」？`)) return;
+    data = data.filter((x) => x.id !== id);
+    save();
+    render();
+  }
+
+  function exportData() {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `bookmarks-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function importData(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const arr = JSON.parse(e.target.result);
+        if (!Array.isArray(arr)) throw new Error('格式错误');
+        const valid = arr.filter((x) => x && x.name && x.url).map((x) => ({
+          id: x.id || uid(),
+          name: String(x.name),
+          url: String(x.url),
+          desc: x.desc ? String(x.desc) : '',
+          category: x.category ? String(x.category) : '未分类',
+        }));
+        if (!confirm(`导入 ${valid.length} 个书签？将合并到现有数据。`)) return;
+        const existingIds = new Set(data.map((x) => x.id));
+        valid.forEach((v) => { if (existingIds.has(v.id)) v.id = uid(); });
+        data = data.concat(valid);
+        save();
+        render();
+      } catch (err) {
+        alert('导入失败：' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // Events
+  searchInput.addEventListener('input', render);
+  $('#btn-add').addEventListener('click', () => openModal());
+  $('#btn-cancel').addEventListener('click', closeModal);
+  $('#btn-save').addEventListener('click', saveItem);
+  modalMask.addEventListener('click', (e) => { if (e.target === modalMask) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalMask.classList.contains('active')) closeModal();
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+  $('#btn-export').addEventListener('click', exportData);
+  $('#btn-import').addEventListener('click', () => $('#file-import').click());
+  $('#file-import').addEventListener('change', (e) => {
+    if (e.target.files[0]) importData(e.target.files[0]);
+    e.target.value = '';
+  });
+
+  render();
+})();
+</script>
 </body>
-
 </html>
